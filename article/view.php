@@ -43,41 +43,39 @@ $db = new firebaseRDB($databaseURL);
 </nav>
 
 <div class="container mt-5">
-    <a href="add.php" class="btn btn-primary">Add New Account</a><br><br>
+    <a href="add.php" class="btn btn-primary">Add Article</a><br><br>
     <table class="table table-bordered">
         <thead class="thead-light">
             <tr>
                 <th scope="col">Thumbnail</th>
-                <th scope="col">Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Phone Number</th>
-                <th scope="col">Roles</th>
-                <th scope="col">Office Location</th>
-                <th scope="col">Profile Description</th>
+                <th scope="col">Title</th>
+                <th scope="col">Content</th>
+                <th scope="col">Category</th>
+                <th scope="col">Editor</th>
+                <th scope="col">Author</th>
                 <th scope="col" colspan="2">Action</th>
             </tr>
         </thead>
         <tbody>
             <?php
-            $data = $db->retrieve("psikolog");
+            $data = $db->retrieve("article");
             $decodedData = json_decode($data, true);
 
             if (is_array($decodedData)) {
-                foreach ($decodedData as $id => $psikolog) {
-                    if (is_array($psikolog)) {
+                foreach ($decodedData as $id => $article) {
+                    if (is_array($article)) {
                         echo "<tr>
-                                <td><img src='{$psikolog['profilePict']}' style='max-width: 100px; max-height: 100px;'></td>
-                                <td>{$psikolog['name']}</td>
-                                <td>{$psikolog['email']}</td>
-                                <td>{$psikolog['phoneNum']}</td>
-                                <td>{$psikolog['roles']}</td> 
-                                <td>{$psikolog['officeLocation']}</td> 
-                                <td>{$psikolog['profileDescription']}</td> 
+                                <td><img src='{$article['thumbnail']}' style='max-width: 100px; max-height: 100px;'></td>
+                                <td>{$article['title']}</td>
+                                <td>{$article['content']}</td>
+                                <td>{$article['category']}</td>
+                                <td>{$article['editor']}</td> 
+                                <td>{$article['author']}</td> 
                                 <td><a href='edit.php?id=$id' class='btn btn-warning'>EDIT</a></td>
                                 <td><a href='delete.php?id=$id' class='btn btn-danger'>DELETE</a></td>
                               </tr>";
                     } else {
-                        // Handle the case where $psikolog is not an array (perhaps log an error)
+                        // Handle the case where $article is not an array (perhaps log an error)
                         echo "<tr><td colspan='7'>Invalid article format</td></tr>";
                     }
                 }

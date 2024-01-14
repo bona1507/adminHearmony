@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $newPsikologRef = $database->getReference("psikolog")->push();
     $newPsikologKey = $newPsikologRef->getKey();
 
-    $newFileName = 'article-' . $newPsikologKey . '.jpg';
+    $newFileName = 'psikolog' . $newPsikologKey . '.jpg';
     $fileTmpName = $file['tmp_name'];
 
     // Upload the file to Firebase Storage
