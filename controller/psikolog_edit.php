@@ -13,7 +13,7 @@ use Kreait\Firebase\Factory;
 $db = new firebaseRDB($databaseURL);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $id = $_POST['id'];
+    $id = $_GET['id'];
 
     // Fetch existing data from Firebase Realtime Database
     $retrieve = $db->retrieve("psikolog/$id");

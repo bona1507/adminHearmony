@@ -96,6 +96,7 @@ $contentString = htmlspecialchars($data['content']);
                 </select>
             </div>
         </div>
+        <input type="hidden" name="id" value="<?php echo $id; ?>">
         <div class="form-group row">
             <div class="col-sm-9 offset-sm-3">
                 <button type="submit" class="btn btn-primary">SAVE</button>
