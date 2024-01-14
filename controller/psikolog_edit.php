@@ -35,14 +35,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Upload the new file to Firebase Storage and rename it based on the article title
     $file = $_FILES['profilePict'];  // Corrected the file input name
-    $newFileName = 'psikolog/psikolog' . $id. '.jpg';
+    $newFileName = 'psikolog/psikolog' . $id . '.jpg';
     $object = $storageBucket->upload(file_get_contents($file['tmp_name']), ['name' => $newFileName]);
 
     // Get the public URL of the uploaded file
     $thumbnailURL = $object->signedUrl(new \DateTime('2030-12-31'));
 
     // Update data in Firebase Realtime Database
-    $update = $db->update("article", $id, [
+    $update = $db->update("psikolog", $id, [
         "name"              => $_POST['name'],
         "profilePict"       => $thumbnailURL,
         "email"             => $_POST['email'],
