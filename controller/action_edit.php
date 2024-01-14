@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $data = json_decode($retrieve, true);
 
     // Check if the thumbnail file input is empty
-    if (empty($_FILES['thumbnail']['name'])) {
+    if (empty($_FILES['profilePict']['name'])) {
         echo '<script>alert("Please provide a new thumbnail."); window.location.href = "../article/edit.php?id=' . $id . '";</script>';
         exit();
     }
