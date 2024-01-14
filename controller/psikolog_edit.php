@@ -16,12 +16,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = $_POST['id'];
 
     // Fetch existing data from Firebase Realtime Database
-    $retrieve = $db->retrieve("article/$id");
+    $retrieve = $db->retrieve("psikolog/$id");
     $data = json_decode($retrieve, true);
 
     // Check if the thumbnail file input is empty
     if (empty($_FILES['thumbnail']['name'])) {
-        echo '<script>alert("Please provide a new thumbnail."); window.location.href = "../article/edit.php?id=' . $id . '";</script>';
+        echo '<script>alert("Please provide a new thumbnail."); window.location.href = "../psikolog/edit.php?id=' . $id . '";</script>';
         exit();
     }
 
@@ -31,11 +31,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Handle file upload to Firebase Storage
     $storageBucket = $storage->getBucket();
-    $storageBucket->object('thumbnails/' . 'article-' . ($data['title']) . '.jpg')->delete(); // Delete existing thumbnail
+    $storageBucket->object('psikolog/' . 'psikolog' . ($data['title']) . '.jpg')->delete();
 
     // Upload the new file to Firebase Storage and rename it based on the article title
-    $file = $_FILES['thumbnail'];
-    $newFileName = 'thumbnails/article-' . $_POST['title'] . '.jpg';
+    $file = $_FILES['psikolog'];
+    $newFileName = 'psikolog/psikolog' . $_POST['title'] . '.jpg';
     $object = $storageBucket->upload(file_get_contents($file['tmp_name']), ['name' => $newFileName]);
 
     // Get the public URL of the uploaded file
@@ -43,18 +43,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Update data in Firebase Realtime Database
     $update = $db->update("article", $id, [
-        "title"     => $_POST['title'],
-        "thumbnail" => $thumbnailURL,
-        "content"   => $_POST['content'],
-        "category"  => $_POST['category'],
-        "editor"    => $_POST['editor'],
-        "author"    => $_POST['author']  
+        "name"              => $_POST['name'],
+        "profilePict"       => $thumbnailURL,
+        "email"             => $_POST['email'],
+        "phoneNum"          => $_POST['phoneNum'],
+        "roles"             => $_POST['roles'],
+        "officeLocation"    => $_POST['officeLocation'],
+        "profileDescription"=> $_POST['profileDescription']
     ]);
 
-    echo '<script>alert("Data updated successfully."); window.location.href = "../view/main.php";</script>';
+    echo '<script>alert("Data updated successfully."); window.location.href = "../psikolog/view.php";</script>';
     exit();
 } else {
-    echo '<script>alert("Invalid request method."); window.location.href = "../view/edit.php?id=' . $id . '";</script>';
+    echo '<script>alert("Invalid request method."); window.location.href = "../psikolog/edit.php?id=' . $id . '";</script>';
     exit();
 }
 ?>
