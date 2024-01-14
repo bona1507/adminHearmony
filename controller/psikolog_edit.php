@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Upload the new file to Firebase Storage and rename it based on the article title
     $file = $_FILES['profilePict'];  // Corrected the file input name
-    $newFileName = 'psikolog/psikolog' . $_POST['title'] . '.jpg';
+    $newFileName = 'psikolog/psikolog' . $id. '.jpg';
     $object = $storageBucket->upload(file_get_contents($file['tmp_name']), ['name' => $newFileName]);
 
     // Get the public URL of the uploaded file
