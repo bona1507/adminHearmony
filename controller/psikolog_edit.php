@@ -26,12 +26,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Initialize Firebase Storage
-    $factory = (new Factory)->withServiceAccount(__DIR__.'../res/hackfest-ef21a-firebase-adminsdk-gs1gd-fbc2c04471.json');
+    $factory = (new Factory)->withServiceAccount(__DIR__.'/../res/hackfest-ef21a-firebase-adminsdk-gs1gd-fbc2c04471.json');
     $storage = $factory->createStorage();
 
     // Handle file upload to Firebase Storage
     $storageBucket = $storage->getBucket();
-    // $storageBucket->object('psikolog/' . 'profilepict' . $id . '.jpg')->delete();
+    $storageBucket->object('psikolog/' . 'profilepict' . $id . '.jpg')->delete();
 
     // Upload the new file to Firebase Storage and rename it based on the article title
     $file = $_FILES['profilePict'];
