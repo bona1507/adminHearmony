@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Handle file upload to Firebase Storage
     $storageBucket = $storage->getBucket();
-    $storageBucket->object('psikolog/' . 'psikolog' . ($data['title']) . '.jpg')->delete();
+    // $storageBucket->object('psikolog/' . 'psikolog' . ($data['title']) . '.jpg')->delete();
 
     // Upload the new file to Firebase Storage and rename it based on the article title
     $file = $_FILES['profilePict'];  // Corrected the file input name
