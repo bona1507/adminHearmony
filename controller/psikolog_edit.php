@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $data = json_decode($retrieve, true);
 
     // Check if the thumbnail file input is empty
-    if (empty($_FILES['thumbnail']['name'])) {
+    if (empty($_FILES['profilePict']['name'])) {
         echo '<script>alert("Please provide a new thumbnail."); window.location.href = "../psikolog/edit.php?id=' . $id . '";</script>';
         exit();
     }
@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $storageBucket->object('psikolog/' . 'psikolog' . ($data['title']) . '.jpg')->delete();
 
     // Upload the new file to Firebase Storage and rename it based on the article title
-    $file = $_FILES['psikolog'];
+    $file = $_FILES['profilePict'];  // Corrected the file input name
     $newFileName = 'psikolog/psikolog' . $_POST['title'] . '.jpg';
     $object = $storageBucket->upload(file_get_contents($file['tmp_name']), ['name' => $newFileName]);
 
