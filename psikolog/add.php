@@ -60,6 +60,12 @@ if (!isset($_SESSION['user_id'])) {
             </div>
         </div>
         <div class="form-group row">
+            <label for="officeName" class="col-sm-3 col-form-label">Office Name:</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="officeName" name="officeName">
+            </div>
+        </div>
+        <div class="form-group row">
             <label for="officeLocation" class="col-sm-3 col-form-label">Office Location:</label>
             <div class="col-sm-9">
                 <input type="text" class="form-control" id="officeLocation" name="officeLocation">
@@ -79,6 +85,24 @@ if (!isset($_SESSION['user_id'])) {
                     <option value="Obgyn">Obgyn</option>
                     <option value="General Psikolog">General Psikolog</option>
                 </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="treatment" class="col-sm-3 col-form-label">Treatment:</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="treatment" name="treatment">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="experience" class="col-sm-3 col-form-label">Experience:</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="experience" name="experience">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="education" class="col-sm-3 col-form-label">Education:</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="education" name="education">
             </div>
         </div>
         <div class="form-group row">

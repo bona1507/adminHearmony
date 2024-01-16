@@ -52,8 +52,12 @@ $db = new firebaseRDB($databaseURL);
                 <th scope="col">Email</th>
                 <th scope="col">Phone Number</th>
                 <th scope="col">Roles</th>
+                <th scope="col">Office Name</th>
                 <th scope="col">Office Location</th>
                 <th scope="col">Profile Description</th>
+                <th scope="col">Treatment</th>
+                <th scope="col">Experience</th>
+                <th scope="col">Education</th>
                 <th scope="col" colspan="2">Action</th>
             </tr>
         </thead>
@@ -71,8 +75,12 @@ $db = new firebaseRDB($databaseURL);
                                 <td>{$psikolog['email']}</td>
                                 <td>{$psikolog['phoneNum']}</td>
                                 <td>{$psikolog['roles']}</td> 
+                                <td>{$psikolog['officeName']}</td> 
                                 <td>{$psikolog['officeLocation']}</td> 
                                 <td>{$psikolog['profileDescription']}</td> 
+                                <td>{$psikolog['treatment']}</td>
+                                <td>{$psikolog['experience']}</td>
+                                <td>{$psikolog['education']}</td>   
                                 <td><a href='edit.php?id=$id' class='btn btn-warning'>EDIT</a></td>
                                 <td><a href='delete.php?id=$id' class='btn btn-danger'>DELETE</a></td>
                               </tr>";

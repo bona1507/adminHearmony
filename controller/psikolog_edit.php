@@ -48,8 +48,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         "email"             => $_POST['email'],
         "phoneNum"          => $_POST['phoneNum'],
         "roles"             => $_POST['roles'],
+        "officeName"        => $_POST['officeName'],
         "officeLocation"    => $_POST['officeLocation'],
-        "profileDescription"=> $_POST['profileDescription']
+        "profileDescription"=> $_POST['profileDescription'],
+        "treatment"         => $_POST['treatment'],
+        "experience"        => $_POST['experience'],
+        "education"         => $_POST['education']
     ]);
 
     echo '<script>alert("Data updated successfully."); window.location.href = "../psikolog/view.php";</script>';

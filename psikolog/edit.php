@@ -75,6 +75,12 @@ $contentString = htmlspecialchars($data['content']);
             </div>
         </div>
         <div class="form-group row">
+            <label for="officeName" class="col-sm-3 col-form-label">Office Name:</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="officeName" name="officeName">
+            </div>
+        </div>
+        <div class="form-group row">
             <label for="officeLocation" class="col-sm-3 col-form-label">Office Location:</label>
             <div class="col-sm-9">
                 <input type="text" class="form-control" id="officeLocation" name="officeLocation" value="<?php echo $data['officeLocation']?>">
@@ -94,6 +100,24 @@ $contentString = htmlspecialchars($data['content']);
                     <option value="Obgyn" <?php echo ($data['roles'] === 'Obgyn') ? 'selected' : ''; ?>>Obgyn</option>
                     <option value="General Psikolog" <?php echo ($data['roles'] === 'General Psikolog') ? 'selected' : ''; ?>>General Psikolog</option>
                 </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="treatment" class="col-sm-3 col-form-label">Treatment:</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="treatment" name="treatment">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="experience" class="col-sm-3 col-form-label">Experience:</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="experience" name="experience">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="education" class="col-sm-3 col-form-label">Education:</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="education" name="education">
             </div>
         </div>
         <input type="hidden" name="id" value="<?php echo $id; ?>">
