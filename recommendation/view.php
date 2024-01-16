@@ -2,87 +2,94 @@
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location:/../index.php");
+    header("Location:../index.php");
     exit();
 }
-?>
+include("../db/config.php");
+include("../db/firebaseRDB.php");
+$db = new firebaseRDB($databaseURL);
 
+?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Coming Soon</title>
-
+    <title>Hearmony Goal Recommendation Manager</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-    <!-- Custom Styles -->
-    <style>
-        body {
-            background-color: #f8f9fa;
-            margin: 0;
-        }
-
-        .navbar {
-            background-color: #ffffff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .coming-soon-container {
-            text-align: center;
-            padding: 50px;
-        }
-
-        .logo {
-            font-size: 4rem;
-            color: #007bff;
-        }
-
-        .heading {
-            font-size: 2rem;
-            margin-top: 20px;
-        }
-
-        .countdown {
-            font-size: 1.5rem;
-            margin-top: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Hearmony Admin Dashboard</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Hearmony Admin Dashboard</a>
 
+    <!-- Button for toggling responsive navigation -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navigation links -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <!-- Add an empty div with ml-auto to push the logout button to the right -->
+        <div class="ml-auto"></div>
+        
         <!-- Logout button -->
-        <form class="form-inline my-2 my-lg-0 ml-auto" action="../logout.php" method="post">
+        <form class="form-inline my-2 my-lg-0" action="../logout.php" method="post">
             <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Logout</button>
         </form>
-    </nav>
-
-    <div class="coming-soon-container">
-        <div class="logo">
-            <i class="fas fa-hourglass-half"></i>
-        </div>
-        <div class="heading">
-            <h2>Coming Soon</h2>
-        </div>
-        <div class="countdown">
-            <p>Our website is under construction. Stay tuned!</p>
-        </div>
     </div>
+</nav>
 
-    <!-- Bootstrap JS and Popper.js (optional) -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<div class="container mt-5">
+<a href="add.php" class="btn btn-primary">Add New Recommendation</a><br><br>
+    <table class="table table-bordered">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Thumbnail</th>
+                <th scope="col">Title</th>
+                <th scope="col">Category</th>
+                <th scope="col">Sub Category</th>
+                <th scope="col">Price</th>
+                <th scope="col" colspan="2">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $data = $db->retrieve("recommendation");
+            $decodedData = json_decode($data, true);
+
+            if (is_array($decodedData)) {
+                foreach ($decodedData as $id => $recommendation) {
+                    if (is_array($recommendation)) {
+                        echo "<tr>
+                                <td><img src='{$recommendation['thumbnail']}' style='max-width: 100px; max-height: 100px;'></td>
+                                <td>{$recommendation['title']}</td>
+                                <td>{$recommendation['category']}</td>
+                                <td>{$recommendation['subcategory']}</td>
+                                <td>{$recommendation['price']}</td>
+                                <td><a href='edit.php?id=$id' class='btn btn-warning'>EDIT</a></td>
+                                <td><a href='delete.php?id=$id' class='btn btn-danger'>DELETE</a></td>
+                              </tr>";
+                    } else {
+                        // Handle the case where $psikolog is not an array (perhaps log an error)
+                        echo "<tr><td colspan='7'>Invalid article format</td></tr>";
+                    }
+                }
+            } else {
+                // Handle the case where decoding failed (perhaps log an error)
+                echo "<tr><td colspan='7'>Error decoding data from Firebase</td></tr>";
+            }
+            ?>
+        </tbody>
+    </table>
+</div>
+
+<!-- Bootstrap JS and Popper.js (optional) -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 </body>
-
 </html>

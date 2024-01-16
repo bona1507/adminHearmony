@@ -15,12 +15,12 @@ $id = $_GET['id'];
 
 
 if ($id != "") {
-    $retrieve = $db->retrieve("psikolog/$id");
+    $retrieve = $db->retrieve("recommendation/$id");
     $data = json_decode($retrieve, true);
 
     if ($data) {
         // Delete the article data from the database
-        $delete = $db->delete("psikolog", $id);
+        $delete = $db->delete("recommendation", $id);
 
         // Initialize Firebase Storage
         $factory = (new Factory)->withServiceAccount(__DIR__.'/../res/hackfest-ef21a-firebase-adminsdk-gs1gd-fbc2c04471.json');
@@ -28,13 +28,13 @@ if ($id != "") {
 
         // Delete the corresponding image file from Firebase Storage
         $storageBucket = $storage->getBucket();
-        $storageBucket->object('psikolog/psikolog' . $id);
+        $storageBucket->object('recommendation/thumbnail' . $id);
 
-        echo '<script>alert("Data delete successfully."); window.location.href = "../psikolog/view.php";</script>';
+        echo '<script>alert("Data delete successfully."); window.location.href = "../recommendation/view.php";</script>';
     } else {
-        echo '<script>alert("Account not found."); window.location.href = "../psikolog/view.php";</script>';
+        echo '<script>alert("Account not found."); window.location.href = "../recommendation/view.php";</script>';
     }
 } else {
-    echo '<script>alert("Invalid psikolog id."); window.location.href = "../psikolog/view.php";</script>';;
+    echo '<script>alert("Invalid psikolog id."); window.location.href = "../recommendation/view.php";</script>';;
 }
 ?>
