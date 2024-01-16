@@ -15,7 +15,7 @@ $id = $_GET['id'];
 
 
 if ($id != "") {
-    $retrieve = $db->retrieve("article/$id");
+    $retrieve = $db->retrieve("psikolog/$id");
     $data = json_decode($retrieve, true);
 
     if ($data) {
@@ -28,13 +28,13 @@ if ($id != "") {
 
         // Delete the corresponding image file from Firebase Storage
         $storageBucket = $storage->getBucket();
-        $storageBucket->object('psikolog/' . 'article-' . $id);
+        $storageBucket->object('psikolog/' . 'psikolog' . $id);
 
         echo '<script>alert("Data delete successfully."); window.location.href = "../psikolog/view.php";</script>';
     } else {
-        echo '<script>alert("Article not found."); window.location.href = "../psikolog/view.php";</script>';
+        echo '<script>alert("Account not found."); window.location.href = "../psikolog/view.php";</script>';
     }
 } else {
-    echo '<script>alert("Invalid article id."); window.location.href = "../psikolog/view.php";</script>';;
+    echo '<script>alert("Invalid psikolog id."); window.location.href = "../psikolog/view.php";</script>';;
 }
 ?>

@@ -13,7 +13,7 @@ use Kreait\Firebase\Factory;
 $db = new firebaseRDB($databaseURL);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $id = $_GET['id'];
+    $id = $_POST['id'];
 
     // Fetch existing data from Firebase Realtime Database
     $retrieve = $db->retrieve("psikolog/$id");
@@ -31,11 +31,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Handle file upload to Firebase Storage
     $storageBucket = $storage->getBucket();
-    // $storageBucket->object('psikolog/' . 'profilepict' . $id . '.jpg')->delete();
+    $storageBucket->object('psikolog/' . 'psikolog' . ($data['id']) . '.jpg')->delete(); // Delete existing thumbnail
 
     // Upload the new file to Firebase Storage and rename it based on the article title
     $file = $_FILES['profilePict'];
-    $newFileName = 'psikolog/profilepict' . $id . '.jpg';
+    $newFileName = 'psikolog/psikolog' . $_POST['id'] . '.jpg';
     $object = $storageBucket->upload(file_get_contents($file['tmp_name']), ['name' => $newFileName]);
 
     // Get the public URL of the uploaded file

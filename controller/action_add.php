@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Check if the file extension is JPG
     if ($fileExtension !== 'jpg') {
-        echo '<script>alert("Please upload a JPG file."); window.location.href = "../view/add.php";</script>';
+        echo '<script>alert("Please upload a JPG file."); window.location.href = "../article/add.php";</script>';
         exit();
     }
 
@@ -59,10 +59,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         "editor"    => $_POST['editor']
     ]);
 
-    echo '<script>alert("Data update successfully."); window.location.href = "../view/main.php";</script>';
+    echo '<script>alert("Data update successfully."); window.location.href = "../article/view.php";</script>';
     exit();
 } else {
-    echo '<script>alert("Invalid request method."); window.location.href = "../view/add.php?id=' . $id . '";</script>';
+    echo '<script>alert("Invalid request method."); window.location.href = "../article/add.php?id=' . $id . '";</script>';
     exit();
 }
 ?>

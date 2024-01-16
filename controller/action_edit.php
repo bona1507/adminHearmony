@@ -31,11 +31,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Handle file upload to Firebase Storage
     $storageBucket = $storage->getBucket();
-    $storageBucket->object('thumbnails/' . 'article-' . ($data['title']) . '.jpg')->delete(); // Delete existing thumbnail
+    $storageBucket->object('thumbnails/' . 'article' . ($data['id']) . '.jpg')->delete(); // Delete existing thumbnail
 
     // Upload the new file to Firebase Storage and rename it based on the article title
     $file = $_FILES['thumbnail'];
-    $newFileName = 'thumbnails/article-' . $_POST['title'] . '.jpg';
+    $newFileName = 'thumbnails/article-' . $_POST['id'] . '.jpg';
     $object = $storageBucket->upload(file_get_contents($file['tmp_name']), ['name' => $newFileName]);
 
     // Get the public URL of the uploaded file
@@ -51,10 +51,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         "author"    => $_POST['author']  
     ]);
 
-    echo '<script>alert("Data updated successfully."); window.location.href = "../view/main.php";</script>';
+    echo '<script>alert("Data updated successfully."); window.location.href = "../article/view.php";</script>';
     exit();
 } else {
-    echo '<script>alert("Invalid request method."); window.location.href = "../view/edit.php?id=' . $id . '";</script>';
+    echo '<script>alert("Invalid request method."); window.location.href = "../article/edit.php?id=' . $id . '";</script>';
     exit();
 }
 ?>

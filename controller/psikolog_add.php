@@ -27,6 +27,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $file = $_FILES['profilePict'];
     $fileExtension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
 
+    // Check if the file extension is JPG
+    if ($fileExtension !== 'jpg') {
+        echo '<script>alert("Please upload a JPG file."); window.location.href = "../psikolog/add.php";</script>';
+        exit();
+    }
+
     $newPsikologRef = $database->getReference("psikolog")->push();
     $newPsikologKey = $newPsikologRef->getKey();
 
